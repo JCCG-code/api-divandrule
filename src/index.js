@@ -15,13 +15,13 @@ import superadminRouter from './routers/superadmin.router'
 
 // Initializations
 const dapp = express()
-const port = process.env.PORT || 5001
+const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 5001;
 
 
 // Middewares
 dapp.use(express.json())
 dapp.use(express.urlencoded({ extended: true }))
-dapp.use(cors({ credentials: true, origin: ['http://localhost:8080'] }))
+dapp.use(cors({ origin: (origin, callback) => callback(null, true), credentials: true }));
 
 
 // Routes
@@ -34,7 +34,7 @@ dapp.use('/api/src/uploads', express.static(path.resolve(__dirname, 'uploads')))
 
 
 // Server and database are listening
-mongoose.connect('mongodb://localhost/tfg-dapp-database')
+mongoose.connect('mongodb://localhost/divandrule-database')
     .then(db => console.log('DB is connected'))
     .catch(err => console.log(err))
 dapp.listen(port, () => {console.log(`Api rest server on port ${port}`)})
