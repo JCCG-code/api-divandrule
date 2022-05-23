@@ -32,7 +32,7 @@ export const getTransactions = (req, res) =>
                 let auxDateRegister = new Date(transactionsMap[transaction._id].dateRegister)
                 let dateNow = new Date(Date.now())
                 //auxDateRegister.setMonth(auxDateRegister.getMonth()+5)
-                //dateNow.setMonth(dateNow.getMonth()+3)
+                dateNow.setMonth(dateNow.getMonth()+3)
 
                 // Calculate claim amount
                 let investmentAmount = transactionsMap[transaction._id].numberTokens
